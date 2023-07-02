@@ -4,17 +4,48 @@ import { UserHeader } from "@/components/1.7/Navbar/Navbar-1-7";
 import styles from "@/assets/styles/1.7/Main.module.scss";
 import { ModalForm } from "@/components/1.7/ModalWindow/ModalForm";
 import { Popover, Table } from "antd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import arrowGreen from "@/assets/svg/arrowGreen.svg";
 import arrowRed from "@/assets/svg/arrowRed.svg";
 import edit from "@/assets/svg/edit.svg";
 import deleteSvg from "@/assets/svg/delete.svg";
 import alert from "@/assets/svg/1_6Alert.svg";
 import { useTranslation, withTranslation } from "react-i18next";
+import { useModel_1_7 } from "@/services/1_7store";
+
+
+
 
 const HomePage = () => {
   const { t } = useTranslation();
   const [modalActive, setModalActive] = useState(false);
+
+  const { getTalons, printTalons, removeTalon, editTalon } = useModel_1_7();
+
+  const token = "<ваш_токен>"; // Замените на ваш токен авторизации
+  const fetchQueue = useModel_1_7((state) => state.fetchQueue);
+  const queue = useModel_1_7((state) => state.queue);
+
+
+  useEffect(() => {
+    fetchQueue(token);
+  }, []);
+
+  useEffect(() => {
+   getTalons();
+ }, []);
+
+ const handlePrintTalon = (id) => {
+   printTalons(id);
+ };
+
+ const handleRemoveTalon = (id) => {
+   removeTalon(id);
+ };
+
+ const handleEditTalon = (talonData) => {
+   editTalon(talonData);
+ };
 
   const content = (
     <div className={styles.popoverContent}>
@@ -25,7 +56,7 @@ const HomePage = () => {
 
   const tableContent = (client) => (
     <div className={styles.tableContent}>
-      <div onClick={() => handleTransferClient(client)}>Перенести</div>
+      <div onClick={() => handleEditTalon(client.key)}>Изменить</div>
       <div onClick={() => handleDeleteClient(client)}>Удалить</div>
     </div>
   );
@@ -112,7 +143,7 @@ const HomePage = () => {
         if (+value <= 15 && value) {
           return (
             <p className={styles.columnDataTime} style={{ color: "#2E6C47" }}>
-              {value} {t('table.body.serviceTime.min')}
+              {value} {t("table.body.serviceTime.min")}
             </p>
           );
         } else if (+value > 15) {
@@ -122,7 +153,9 @@ const HomePage = () => {
                 color: "#B5051E",
               }}
               className={styles.columnDataTime}>
-              <span>{value}  {t('table.body.serviceTime.min')}</span>
+              <span>
+                {value} {t("table.body.serviceTime.min")}
+              </span>
               <img src={alert} alt="alert" />
               <Popover
                 content={tableContent(client)}
@@ -139,78 +172,16 @@ const HomePage = () => {
       },
     },
   ];
-  const data = [
-    {
-      number: "A0122",
-      name: "Ильясов Айбек Рустамович",
-      inOrder: "-",
-      benefit: "нет",
-      service: "Услуга 1",
-      status: "done",
-      time: "15",
-      key: 1,
-    },
-    {
-      number: "A0912",
-      name: "Иванов Федор Петрович",
-      inOrder: "-",
-      benefit: "нет",
-      service: "Услуга 4",
-      status: "progress",
-      key: 2,
-      time: "18",
-    },
-    {
-      number: "A0912",
-      name: "Иванов Федор Петрович",
-      inOrder: "-",
-      benefit: "нет",
-      service: "Услуга 4",
-      status: "await",
-      key: 3,
-      time: "15",
-    },
-    {
-      number: "A0912",
-      name: "Иванов Федор Петрович",
-      inOrder: "-",
-      benefit: "нет",
-      service: "Услуга 4",
-      status: "В процессе",
-      key: 4,
-      time: "18",
-    },
-    {
-      number: "A0912",
-      name: "Иванов Федор Петрович",
-      inOrder: "-",
-      benefit: "нет",
-      service: "Услуга 4",
-      status: "В процессе",
-      key: 5,
-      time: "",
-    },
-    {
-      number: "A0912",
-      name: "Иванов Федор Петрович",
-      inOrder: "-",
-      benefit: "нет",
-      service: "Услуга 4",
-      status: "В процессе",
-      key: 6,
-      time: "",
-    },
-    {
-      number: "A0912",
-      name: "Иванов Федор Петрович",
-      inOrder: "-",
-      benefit: "нет",
-      service: "Услуга 4",
-      status: "В процессе",
-      key: 7,
-      time: "15",
-    },
-  ];
+  const data = queue.map((item) => ({
+   number: item.token,
+   name: item.client_type,
+   inOrder: item.status === "waiting" ? "да" : "нет",
+   benefit: "-",
+   service: item.service,
+   status: item.status,
+   time: "-",
+   key: item.token,
+ }));
 
   return (
     <div>
@@ -219,27 +190,27 @@ const HomePage = () => {
       <div className={styles.main}>
         <div className={styles.cards}>
           <div className={styles.main__firstCard}>
-            <p>{t('card.title1')}</p>
+            <p>{t("card.title1")}</p>
             <div>
               <div className={styles.body}>
                 <div className={styles.greenlogo}>
                   <img src={arrowGreen} alt="logo" />
                   <span>3</span>
                 </div>
-                <p>{t('card.body')}</p>
+                <p>{t("card.body")}</p>
               </div>
               <p className={styles.number}>16</p>
             </div>
           </div>
           <div className={styles.main__secondCard}>
-            <p>{t('card.title2')}</p>
+            <p>{t("card.title2")}</p>
             <div>
               <div className={styles.secondBody}>
                 <div className={styles.redlogo}>
                   <img src={arrowRed} alt="logo" />
                   <span>1</span>
                 </div>
-                <p>{t('card.body')}</p>
+                <p>{t("card.body")}</p>
               </div>
               <p className={styles.number}>4</p>
             </div>
@@ -250,14 +221,14 @@ const HomePage = () => {
           <button
             className={styles.newTalon}
             onClick={() => setModalActive(true)}>
-           {t('newtalon.button')}
+            {t("newtalon.button")}
           </button>
           <ModalForm active={modalActive} setActive={setModalActive} />
         </div>
       </div>
       <div className={styles.table}>
         <Table
-          style={{ width: "90%", marginLeft: "5%" }}
+          style={{ width: "90%", marginLeft: "5%"}}
           columns={columns}
           dataSource={data}
           scroll={{ x: 1000 }}
@@ -269,7 +240,7 @@ const HomePage = () => {
                 fontSize: "18px",
                 fontWeight: "600",
               }}>
-          {t('table.titles.allClients')}
+              {t("table.titles.allClients")}
             </p>
           )}
         />
