@@ -39,7 +39,7 @@ export const UserHeader = ({ employee, searchValue, setSearchValue }) => {
           value={searchValue}
           onChange={(event) => setSearchValue(event.target.value)}
           className={styles.search__input}
-          placeholder="Поиск по реквизитам"
+          placeholder="Поиск по номеру талона"
           type="text"
         />
       </div>
