@@ -1,4 +1,5 @@
 {
+
   "table": {
     "titles": {
       "allClients": "Все  клиенты:",
@@ -15,34 +16,64 @@
         "completed": "Завершен",
         "inProgress": "В процессе",
         "expected": "Ожидается"
-      },
-      "serviceTime": {
-        "min": "мин"
-      },
-      "benefit": {
-        "yes": "Да",
-        "no": "Нет"
-      }
-    }
-  },
 
-  "navbar": {
-    "queue": "Очередь",
-    "date": "Дата"
-  },
-  "card": {
-    "title1": "Клиентов за день",
-    "title2": "Отмененные визиты",
-    "body": "Больше чем вчера"
-  },
-  "newtalon": {
-    "button": "Новый талон",
-    "button2": "Печать"
-  },
-  "sidebar": {
-    "popover": {
-      "profile": "Профиль",
-      "settings": "Настройки"
-    }
-  }
-}
+      },
+      "body": {
+         "status": {
+            "completed": "Завершен",
+            "inProgress": "В процессе",
+            "expected": "Ожидается"
+         },
+         "serviceTime": {
+            "min": "мин"
+         },
+         "benefit": {
+            "yes": "Да",
+            "no": "Нет"
+         },
+         "service": {
+            "CreditFinancing": "Кредитование",
+            "CurrencyExchange": "Обмен валют",
+            "MoneyTransfers": "Денежные переводы",
+            "CardIssuance": "Выпуск карты",
+            "ReceiveTransfer": "Получить перевод",
+            "OpenAnAccount": "Открыть счет",
+            "SecuritiesOperations": "Опперации с ценными бумагами",
+            "IslamicFinancing": "Исламское финансирование"
+         },
+         "type": {
+            "naturalPerson": "Физическое лицо",
+            "legalЕntity": "Юридическое лицо"
+         }
+      }
+   },
+   "navbar": {
+      "queue": "Всего",
+      "date": "Дата"
+   },
+   "card": {
+      "title1": "Клиентов за день",
+      "title2": "Отмененные визиты",
+      "body": "Больше чем вчера"
+   },
+   "sidebar": {
+      "popover": {
+         "profile": "Профиль",
+         "settings": "Настройки"
+      }
+   },
+   "auth": {
+      "placeholder": {
+         "email": "Потча",
+         "password": "Пароль"
+      },
+      "forgetPassword": "Забыли пароль ?",
+      "button": {
+         "placeholder": "Войти"
+      },
+      "errors": {
+         "emailError": "Пожалуйста, введите email !",
+         "passwordError": "Пожалуйста, введите пароль !"
+      }
+   }
+}}
