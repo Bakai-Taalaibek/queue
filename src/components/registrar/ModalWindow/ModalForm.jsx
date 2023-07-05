@@ -10,6 +10,10 @@ import { useTranslation } from "react-i18next";
 //   console.log(`selected ${value}`);
 // };
 
+const handlePrintClick = () => {
+   window.print();
+ };
+
 // Дата и время
 const onChange = (date, dateString) => {
   console.log(date, dateString);

@@ -36,6 +36,14 @@ const AuthPage = () => {
       await login(values, navigate);
    };
 
+   const registrarLogin = useRegistrar((state) => state.login);
+const registrarToken = useRegistrar((state) => state.token);
+
+const hanldeRegistrar = async (values) => {
+   await registrarLogin(values, navigate);
+ };
+
+
    return (
       <div className={styles.main}>
          <div className={styles.languageBlock}>

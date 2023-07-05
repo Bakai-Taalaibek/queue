@@ -18,6 +18,7 @@ import { useTranslation } from "react-i18next";
 import MainLayout from "@/components/operator/UI/Layout";
 import { calculateTimeDifference } from "@/utils/utils";
 import { useRegistrar } from "@/services/registrarStore";
+
 import { useNavigate } from "react-router";
 
 import { useMain } from "@/services/MainStore";
@@ -310,6 +311,7 @@ const RegistrarHome = () => {
   });
 
   return getTalonsLoading && getProfileInfoLoading ? (
+
     <div
       style={{
         height: "100vh",
@@ -337,6 +339,15 @@ const RegistrarHome = () => {
           <div className={styles.cardBlock}>
             <div className={styles.card1}>
               <div className={styles.head}>
+                <div>
+                  <Popover
+                    id="cardPopover"
+                    content={content}
+                    trigger="click"
+                    placement="rightTop">
+                    <img src={dots} alt="dots" />
+                  </Popover>
+                </div>
                 <p>{t("card.title1")}</p>
               </div>
               <div className={styles.body}>
@@ -349,6 +360,7 @@ const RegistrarHome = () => {
               <div className={styles.footer}>
                 <p>16</p>
               </div>
+
             </div>
             <div className={styles.card2}>
               <div className={styles.head}>
@@ -365,6 +377,7 @@ const RegistrarHome = () => {
                 <p>4</p>
               </div>
             </div>
+
           </div>
           <div className={styles.buttonBlock}>
             <button
