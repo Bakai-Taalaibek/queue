@@ -51,6 +51,10 @@
       "date": "Date",
       "window": "Window"
    },
+   "Button": {
+      "newtalon": "New talon",
+      "print": "Print"
+   },
    "card": {
       "title1": "Clients per Day",
       "title2": "Cancelled sessions",
