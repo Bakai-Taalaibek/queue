@@ -14,10 +14,22 @@ export const useRegistrar = create((set, get) => ({
    getTalonsLoading: false,
    talons: [],
 
-   getTalons: async () => {
+   getTalons: async (branchId) => {
       set({ getTalonsLoading: true });
       try {
-         const res = await axios.get(`${API}/talon/`);
+        const res = await axios.get(`/api/queue/data/branch-queue/${branchId}`);
+        set({ talons: res.data });
+      } catch (error) {
+        console.log(error, ' <<<<< Ошибка при получении данных');
+      } finally {
+        set({ getTalonsLoading: false });
+      }
+    },
+
+   getTalons: async (id) => {
+      set({ getTalonsLoading: true });
+      try {
+         const res = await axios.get(`${API}/talon`);
 
          set({
             talons: res.data,
@@ -28,6 +40,10 @@ export const useRegistrar = create((set, get) => ({
          set({ getTalonsLoading: false });
       }
    },
+
+
+
+   
 
    // Print talon with personal id
    printTalons: async () => {
@@ -55,14 +71,6 @@ export const useRegistrar = create((set, get) => ({
       }
    },
 
-   //   Edit and Update talon
-
-   // editTalon: async (talonData) => {
-   //    try {
-   //       await axios.patch(`${API}/talons/edit`, talonData);
-   //       console.log('<<<<< Успешно отредактирован талон с id >>>', talonData.id);
-   //    } catch (error) {
-   //       console.log(error, '<<<<< Ошибка при редактировании талона>>');
-   //    }
-   // },
 }));
+
+

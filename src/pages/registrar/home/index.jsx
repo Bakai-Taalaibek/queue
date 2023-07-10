@@ -13,8 +13,7 @@ import arrowRed from '@/assets/svg/arrowRed.svg';
 import edit from '@/assets/svg/edit.svg';
 import dots from '@/assets/svg/dots.svg';
 import { LoadingOutlined } from '@ant-design/icons';
-import { canceledClientsCounter, returnUnderstandableDate, timeLimitSeconds } from '@/utils/utils';
-import deleteSvg from '@/assets/svg/delete.svg';
+import { returnUnderstandableDate, timeLimitSeconds } from '@/utils/utils';
 import alert from '@/assets/svg/1_6Alert.svg';
 import darkModeAlert from '@/assets/svg/darkModeAlert.svg';
 import darkModeDots from '@/assets/svg/darkModeDots.svg';
@@ -24,7 +23,6 @@ import MainLayout from '@/components/operator/UI/Layout';
 import { calculateTimeDifference } from '@/utils/utils';
 import { useRegistrar } from '@/services/registrarStore';
 import { useNavigate } from 'react-router';
-import { useOperator } from '@/services/operatorStore';
 import { useMain } from '@/services/MainStore';
 
 const RegistrarHome = () => {
@@ -348,6 +346,8 @@ const RegistrarHome = () => {
    const getTalons = useRegistrar((state) => state.getTalons);
    const talons = useRegistrar((state) => state.talons);
    const getTalonsLoading = useRegistrar((state) => state.getTalonsLoading);
+
+
 
    const navigate = useNavigate();
 
