@@ -51,19 +51,19 @@ export const useRegistrar = create((set, get) => ({
   },
 
   deleteTalon: async (id) => {
-    set({ getTalonsLoading: true });
-    try {
-      await axios.delete(`${API}/talon/remove/${id}/`, {
-        headers: {
-          Authorization: `Bearer ${get().token.access}`,
-        },
+   set({ getTalonsLoading: true });
+   try {
+      const res = await axios.get(`${API}/talon/remove/${id}/`, {
+         headers: {
+            Authorization: `Bearer ${get().token.access}`,
+         },
       });
-    } catch (err) {
+   } catch (err) {
       set({ errors: err });
-    } finally {
+   } finally {
       set({ getTalonsLoading: false });
-    }
-  },
+   }
+},
 
   restoreTalon: async (token) => {
    try {
