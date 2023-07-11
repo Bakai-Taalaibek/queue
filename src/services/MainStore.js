@@ -1,3 +1,4 @@
+import { axiosInstance } from '@/axios';
 import { API, ShowMessage } from '@/utils/utils';
 import axios from 'axios';
 import { create } from 'zustand';
@@ -6,9 +7,11 @@ export const useMain = create((set, get) => ({
    email: {},
    token: JSON.parse(localStorage.getItem('token')) || {},
    employee: {},
+   error: [],
 
    isDarkMode: false,
 
+   isSuperAdmin: false,
    getProfileInfoLoading: false,
 
    login: async (body, navigate) => {
@@ -21,16 +24,19 @@ export const useMain = create((set, get) => ({
             case 'operator':
                navigate('/operator/home');
                break;
-            case 'registrar':
+            case 'registrator':
                navigate('/registrar/home');
+               break;
+            case 'admin':
+            case 'super_admin':
+               navigate('/admin/home');
                break;
 
             default:
                break;
          }
       } catch (err) {
-         set({ errors: err });
-         ShowMessage('error', 'Ошибка при входе на аккаунт');
+         ShowMessage('error', err.message);
       } finally {
       }
    },
@@ -38,19 +44,29 @@ export const useMain = create((set, get) => ({
    getProfileInfo: async (email) => {
       set({ getProfileInfoLoading: true });
       try {
-         const res = await axios.get(`${API}/employee/retrieve/${email}/`, {
-            headers: {
-               Authorization: `Bearer ${get().token.access}`,
-            },
-         });
+         const res = await axiosInstance('/employee/retrieve/');
          set({ employee: res.data });
       } catch (err) {
-         set({ errors: err });
+         ShowMessage('error', err.message);
       } finally {
          set({ getProfileInfoLoading: false });
       }
    },
    toggleDarkMode: (checked) => {
       set({ isDarkMode: checked });
+   },
+   adminIdentifier: () => {
+      const admin = JSON.parse(localStorage.getItem('token'));
+      switch (admin.position) {
+         case 'admin':
+            set({ isSuperAdmin: false });
+            break;
+         case 'super_admin':
+            set({ isSuperAdmin: true });
+            break;
+
+         default:
+            set({ isSuperAdmin: false });
+      }
    },
 }));
