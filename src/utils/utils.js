@@ -1,3 +1,6 @@
+
+
+
 import { message } from 'antd';
 
 export const API = 'http://rskseo.pythonanywhere.com';
@@ -45,6 +48,7 @@ export const formatTime = (time) => {
    const formattedSeconds = String(seconds).padStart(2, '0');
 
    return `${formattedMinutes}:${formattedSeconds}`;
+
 };
 
 export const clientsCounter = (today, yesterday) => {

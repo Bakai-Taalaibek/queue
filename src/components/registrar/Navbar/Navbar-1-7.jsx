@@ -15,8 +15,8 @@ import { UserOutlined } from '@ant-design/icons';
 import { useMain } from '@/services/MainStore';
 
 export const UserHeader = ({ employee, searchValue, setSearchValue }) => {
-   const { t, i18n } = useTranslation();
-   const [lang, setLang] = useState('ru');
+  const { t, i18n } = useTranslation();
+  const [lang, setLang] = useState("ru");
 
    const handleChangeLanguage = (language) => {
       i18n.changeLanguage(language);
@@ -30,11 +30,11 @@ export const UserHeader = ({ employee, searchValue, setSearchValue }) => {
             <img className={styles.main__logo} src={isDarkMode ? darkModeLogo : logo} alt='logo' />
          </div>
 
-         <div className={styles.languages}>
-            <img onClick={() => handleChangeLanguage('kg')} src={KG} alt='KG' />
-            <img onClick={() => handleChangeLanguage('ru')} src={RU} alt='RU' />
-            <img onClick={() => handleChangeLanguage('en')} src={EN} alt='EN' />
-         </div>
+      <div className={styles.languages}>
+        <img onClick={() => handleChangeLanguage("kg")} src={KG} alt="KG" />
+        <img onClick={() => handleChangeLanguage("ru")} src={RU} alt="RU" />
+        <img onClick={() => handleChangeLanguage("en")} src={EN} alt="EN" />
+      </div>
 
          <div className='main__search'>
             <img className={styles.search__logo} src={search} alt='logo' />
@@ -61,5 +61,6 @@ export const UserHeader = ({ employee, searchValue, setSearchValue }) => {
             </div>
          </div>
       </div>
-   );
+   
+  );
 };
